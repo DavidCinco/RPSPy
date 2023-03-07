@@ -1,0 +1,114 @@
+#:import hex kivy.utils.get_color_from_hex
+
+<GameOverPopup>:
+    id: gameoverpopup_id
+    size_hint: .4, .4
+    title: "GAME OVER"
+    title_size: 24
+    auto_dismiss:False
+
+    BoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            text: "You have 0 lives left."
+            color: hex("#FFFFFF")
+            halign: "center"
+            font_size: 20
+        MDRectangleFlatButton:
+            text: "OK"
+            font_size: 20
+            on_release: root.close()
+
+<ChoosePopup>:
+    id: choosepopup_id
+    size_hint: .7, .5
+    title: "Choose an option"
+    title_size: 20
+    auto_dismiss:False
+    BoxLayout:
+        orientation: "vertical"
+        GridLayout:
+            cols: 3
+            rows: 1
+            MDIconButton:
+                icon: "icons/stone.png"
+                icon_size: "128sp"
+                on_release: root.choice_value("rock")
+            MDIconButton:
+                icon: "icons/paper.png"
+                icon_size: "128sp"
+                on_release: root.choice_value("paper")
+            MDIconButton:
+                icon: "icons/scissors.png"
+                icon_size: "128sp"
+                on_release: root.choice_value("scissors")
+
+        BoxLayout:
+            orientation: "horizontal"
+
+            MDRectangleFlatButton:
+                text: "Exit"
+                on_release: root.dismiss()
+        
+
+<GameWindow>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: hex('#CCE9EC')
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        BoxLayout: 
+            orientation: 'vertical'
+            size_hint_y: .1
+            MDRectangleFlatButton:
+                text: "Return to Menu"
+                on_release: root.return_to_menu()
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: .9
+            BoxLayout:
+                orientation: "horizontal"
+                MDLabel:
+                    id: round_label
+                    text: f"Round #"+str(root.game_round)+""
+                    font_size: 34
+                    bold: True
+                MDLabel:
+                    id: score_label
+                    text: f"Score: "+str(root.user_score)+""
+                    font_size: 34
+                    bold: True
+                MDLabel:
+                    id: lifes_label
+                    text: f"Lifes: "+str(root.user_lifes)+""
+                    font_size: 34
+                    bold: True
+
+            BoxLayout:
+                orientation: "horizontal"
+                GridLayout:
+                    cols: 1
+                    rows: 2
+                    MDLabel:
+                        text: "PLAYER"
+                        font_size: 26
+                        bold: True
+                    Image:
+                        id: player_choice_image
+                        source: "icons/faq.png"
+
+                GridLayout:
+                    cols: 1
+                    rows: 2
+                    MDLabel:
+                        text: "CPU"
+                        font_size: 26
+                        bold: True
+                    Image:
+                        id: cpu_choice_image
+                        source: "icons/faq.png"

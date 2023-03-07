@@ -1,0 +1,97 @@
+#:import hex kivy.utils.get_color_from_hex
+<ExitPopup>:
+    id: popup_id
+    title: "Close App"
+    title_size: 20
+    size_hint: .5,.5
+    auto_dismiss:False
+    BoxLayout:
+        orientation: 'vertical'
+        MDLabel: 
+            text: "Are you sure you want to exit?"
+            font_size: 20
+            color: "white"
+            halign: "center"
+
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: 16
+            MDRectangleFlatButton:
+                theme_text_color: "Custom"
+                text_color: "white"
+                line_color: "blue"
+
+                text: "Close App"
+                font_size: 18
+                on_release: app.get_running_app().stop()
+            MDRectangleFlatButton:
+                theme_text_color: "Custom"
+                text_color: "white"
+                line_color: "red"
+
+                text: "Cancel"
+                font_size: 18
+                on_release: root.dismiss()
+
+<MenuWindow>:
+    BoxLayout:
+        orientation: "vertical" 
+        padding: 10
+        canvas.before:
+            Color:
+                rgba: hex('#CCE9EC')
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        BoxLayout:
+            orientation: "vertical"
+            BoxLayout:
+                orientation: "horizontal"
+                MDLabel:
+                    text: "ROCK"
+                    font_size: 30
+                    bold: True
+                    color: hex("#538FF2")
+                MDLabel:
+                    text: "PAPER"
+                    font_size: 30
+                    bold: True
+                    color: hex("#1AFF00")
+                MDLabel:
+                    text: "SCISSORS"
+                    font_size: 30
+                    bold: True
+                    color: hex("#FF0000")
+            Image:
+                source: "icons/rock-paper-scissors.png"
+
+        BoxLayout:
+            orientation: "vertical"
+            pos_hint: {"x": .4}
+            spacing: 20
+            MDRectangleFlatButton:
+                text: "Start Game"
+                theme_text_color: "Custom"
+                text_color: "black"
+                line_color: "green"
+                font_size: 26
+                on_release: root.start_game()
+                #md_bg_color: "green"
+
+            MDRectangleFlatButton:
+                text: "Leaderboard"
+                theme_text_color: "Custom"
+                text_color: "black"
+                line_color: "blue"
+                font_size: 26
+                on_release: root.leaderboard()
+                #md_bg_color: "green"
+
+            MDRectangleFlatButton:
+                text: "Exit"
+                theme_text_color: "Custom"
+                text_color: "black"
+                line_color: "red"
+                font_size: 26
+                on_release: root.exit()
+                #md_bg_color: "green"
