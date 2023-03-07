@@ -19,7 +19,7 @@ class MainWindow(ScreenManager):
         #con = SqlQueries.create_connection('database/rpsdb.db')
         #query = "CREATE TABLE "
         #SqlQueries.create_table(con, )
-        
+        print(kivy.__version__)
 class MainApp(MDApp):
     def build(self):
         return MainWindow()
